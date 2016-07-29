@@ -82,3 +82,15 @@ class Package(Base):
 
     def __repr__(self):
         return '{0}/{1}'.format(self.repo, self.name)
+    
+    @staticmethod 
+    def package_cmp(x, y):
+        if x.repo < y.repo:
+            return -1
+        elif x.repo == y.repo:
+            if x.name < y.name:
+                return -1
+            else:
+                return 1
+        else:
+            return 1

@@ -8,6 +8,7 @@ from packages.email import send_confirmation, send_reset
 from packages.blueprints.api import upload_package
 from packages.kpack import PackageInfo
 from datetime import datetime, timedelta
+from functools import cmp_to_key
 
 import binascii
 import os
@@ -236,6 +237,10 @@ def users():
     if len(pageResults) == 0:
         page = 0
         pageResults = results.order_by(desc(User.created)).all()[page * PAGE_SIZE:(page + 1) * PAGE_SIZE]
+
+    for result in pageResults:
+        result.packages = sorted(result.packages, key=cmp_to_key(Package.package_cmp))
+
     results = pageResults
     return render_template("users.html", results=results, terms=terms, pageCount=pageCount, page=page)
 

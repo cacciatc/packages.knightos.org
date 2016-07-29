@@ -24,6 +24,7 @@
             <th>User</th>
             <th>Date Knighted</th>
             <th>Confirmation Status</th>
+            <th>Packages</th>
             <th>Privilege Level</th>
         </tr>
         {% for result in results %}
@@ -36,6 +37,12 @@
                 {% else %}
                 <b><font color="A94442">Not Confirmed</font></b>
                 {% endif %}
+            </td>
+            <td>
+                {{ 'None' if len(result.packages) == 0 else ''}}
+                {% for p in result.packages %}
+                <a href="/{{ p.repo + "/" + p.name }}">{{ p.repo + "/" + p.name}}</a>{{ (", " if p != result.packages[-1] else "") }}
+                {% endfor %}
             </td>
             <td>
                 {% if result.admin %}
