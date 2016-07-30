@@ -207,6 +207,7 @@ def upload_package():
     package.copyright = info.copyright
     package.capabilities = ' '.join(info.capabilities)
     package.contents = None
+    package.file_size = info.file_size
     package.dependencies = list()
     for dep in info.dependencies:
         try:

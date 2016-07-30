@@ -157,6 +157,12 @@ document.getElementById("transfer-button").addEventListener('click', function(e)
             <td><a href="{{ package.infourl }}">{{ package.infourl }}</a></td>
         </tr>
         {% endif %}
+        {% if package.file_size %}
+        <tr>
+            <th>File Size</th>
+            <td>{{ '{: n}'.format(package.file_size / 1024) }} KB</td>
+        </tr>
+        {% endif %}
         <tr>
             <th>Downloads</th>
             <td>{{ package.downloads }} </td>

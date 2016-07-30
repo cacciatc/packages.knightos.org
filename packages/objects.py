@@ -69,6 +69,7 @@ class Package(Base):
     infourl = Column(Unicode(1024))
     copyright = Column(Unicode(1024))
     capabilities = Column(Unicode(2048))
+    file_size = Column(Integer)
     dependencies = relationship('Package', 
         secondary=package_dependencies,
         primaryjoin=id==package_dependencies.c.package_id,

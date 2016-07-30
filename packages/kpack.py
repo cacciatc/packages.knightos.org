@@ -15,8 +15,13 @@ class PackageInfo():
     maintainer = None
     infourl = None
     copyright = None
+    file_size = None
     dependencies = list()
     capabilities = list()
+
+    @staticmethod
+    def get_file_size(path):
+        return os.path.getsize(path)
 
     @staticmethod
     def read_package(path):
@@ -49,6 +54,11 @@ class PackageInfo():
                 result.dependencies = [v.split(':')[0] for v in value.split(' ')]
             elif key == 'capabilities':
                 result.capabilities = value.split(' ')
+        try:
+            result.file_size = PackageInfo.get_file_size(path)
+        except:
+            result.file_size = None
+ 
         return result
 
     @staticmethod
